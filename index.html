@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <title>PBP KP Kalisz VR</title>
+        <link rel="icon" type="image/x-icon" href="../book.png">
+        <!---Image source: https://pixabay.com/pl/illustrations/pikselowa-sztuka-otwarta-ksi%c4%85%c5%bcka-9762954/-->
+        <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+        <!---Zoom-->
+        <!--Zoom source code: https://stackoverflow.com/questions/44459356/a-frame-zoom-on-wheel-scroll-->
+        <script>
+        window.addEventListener("wheel", (event) => {
+            // small increments for smoother zooming
+            const delta = event.wheelDelta / 120 / 10;
+            var mycam = document.getElementById("cam").getAttribute("camera");
+            var finalZoom =
+            document.getElementById("cam").getAttribute("camera").zoom + delta;
+            // limiting the zoom
+            if (finalZoom < 0.5) finalZoom = 0.5;
+            if (finalZoom > 2) finalZoom = 2;
+            mycam.zoom = finalZoom;
+        document.getElementById("cam").setAttribute("camera", mycam);
+        });
+        </script>
+
+    </head>
+    <body>
+        <a-scene
+        cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .raycastable">
+            <a-sky src="../magazyn.png" rotation="0 -130 0"></a-sky>
+            <a-text font="roboto" value="PBP KP Kalisz" width="6" position="-2.5 0.25 -1.5" rotation="0 15 0"></a-text>"></a-text>
+
+            <!--- Zoom -->
+            <a-entity id="cam" camera="zoom: 1" look-controls="reverseMouseDrag: true"></a-entity>
+
+            <!-- Hand controls -->
+             <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: .raycastable"></a-entity>
+             <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: .raycastable" line="color: #118A7E"></a-entity>
+             <a-entity id="ui" position="0 1.6 -2.5">
+
+        </a-scene>
+
+    </body>
+</html>
